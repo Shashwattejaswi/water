@@ -2,6 +2,19 @@ import React, { useState, useEffect } from 'react';
 import ApexCharts from 'react-apexcharts';
 
 const StockChart = ({ dates }) => {
+
+  useEffect(() => {
+    setOptions(prevOptions => ({
+      ...prevOptions,
+      series: prevOptions.series.map(seriesItem => ({
+        ...seriesItem,
+        data: dates,
+
+      })),
+     
+    }));
+  }, [dates])
+
   const [options, setOptions] = useState({
     series: [{
       name: 'XYZ MOTORS',
@@ -43,7 +56,7 @@ const StockChart = ({ dates }) => {
     yaxis: {
       labels: {
         formatter: function (val) {
-          return (val / 1000000).toFixed(0);  // Format the y-axis values
+          return val;  // Format the y-axis values
         },
       },
       title: {
@@ -57,7 +70,7 @@ const StockChart = ({ dates }) => {
       shared: false,
       y: {
         formatter: function (val) {
-          return (val / 1000000).toFixed(0);  // Format tooltip values
+          return val;  // Format tooltip values
         },
       },
     },
@@ -65,7 +78,7 @@ const StockChart = ({ dates }) => {
 
   return (
     <div id="chart">
-      <ApexCharts options={options} series={options.series} type="area" height={350} />
+      <ApexCharts options={options} series={options.series} type="area" height={400} />
     </div>
   );
 };
