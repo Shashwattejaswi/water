@@ -11,6 +11,7 @@ function App() {
   let [fromDate, changeFromDate] = useState('');
   let [ToDate, changeToDate] = useState('');
   var dataToShow=[];
+  var dateMap=new Map();
 
   useEffect(() => {
     // This will log the updated state after each change
@@ -97,8 +98,17 @@ function App() {
       });
   
       // Update the state after the dataToShow array is fully prepared
-      setDates(dataToShow);
-      console.log(dates);
+      dataToShow.forEach(entry => {
+          const currentValue=dateMap.get(entry.x) || 0;
+          dateMap.set(entry.x,currentValue+entry.y)
+      });
+      const resultArray = Array.from(dateMap, ([x, y]) => ({ x, y })); // covert hashMap in array
+
+      resultArray.sort((a, b) => new Date(a.x) - new Date(b.x));
+
+      console.log(resultArray)
+      setDates(resultArray);
+      console.log(dataToShow);
   
     } catch (error) {
       console.error('Error sending date:', error);
@@ -115,6 +125,7 @@ function App() {
         <button onClick={(e) => handleSubmit(e)}>ok</button>
       </div>
       <div className="chartBox">
+        <StockChart dates={dates} />
         <StockChart dates={dates} />
       </div>
     </div>

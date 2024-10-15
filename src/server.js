@@ -1,15 +1,14 @@
+require('dotenv').config();
 const express=require('express')
 const mongoose=require('mongoose')
 const bodyParser=require('body-parser')
 const cors=require('cors')
 const server=express()
 const port=5000;
-const mongooseUrl='mongodb+srv://shashwatteju06:tejaswi06@cluster0.wjnmf.mongodb.net/hotel?retryWrites=true&w=majority&appName=Cluster0'
 
 server.use(cors());
 server.use(bodyParser.json());
-
-mongoose.connect(mongooseUrl)
+mongoose.connect(process.env.mongooseUrl)
   .then(() => console.log('MongoDB connected'))
   .catch(err => console.log(err));
 

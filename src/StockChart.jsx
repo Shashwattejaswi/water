@@ -17,7 +17,7 @@ const StockChart = ({ dates }) => {
 
   const [options, setOptions] = useState({
     series: [{
-      name: 'XYZ MOTORS',
+      name: 'children+adult+babies',
       data: dates,  // pass the 'dates' prop here
     }],
     chart: {
@@ -40,7 +40,7 @@ const StockChart = ({ dates }) => {
       size: 0,
     },
     title: {
-      text: 'Stock Price Movement',
+      text: 'client per day',
       align: 'left',
     },
     fill: {
@@ -60,7 +60,7 @@ const StockChart = ({ dates }) => {
         },
       },
       title: {
-        text: 'Price',
+        text: 'Number of person',
       },
     },
     xaxis: {
